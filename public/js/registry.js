@@ -1,6 +1,6 @@
 var userflag = true;
 var passflag = true;
-var passflag2 = true;
+var  passflag2 = true;
 var emailflag=true
 $('.username').on('focus',function(){
  $('p').eq(0).html('设置后不可更改，中英文均可，最长14个英文或7个汉字').css('color','red')
@@ -119,7 +119,9 @@ $('.email').on('blur', function(){
     }
 })
 //提交
-$('.registry').on('submit', function() {
+$('.registry').on('submit', function(e) {
+    e.preventDefault()
+    console.log(1);
     if ($('.username').val() == '') {
         $('p').eq(0).html('用户名不能为空').css('color', 'red')
         userflag = false;
@@ -138,8 +140,21 @@ $('.registry').on('submit', function() {
     }
     if (!userflag || !passflag || !passflag2 || !emailflag) {
         return false
-    } else {
-
     }
-
+    $.ajax({
+        type:'post',
+        url: "http://localhost:3000/register",
+        data: {
+            name: $('.username').val(),
+            password:$('.password').val(),
+            mail:$('.email').val()
+        },
+        success: function(data) {
+            if (JSON.parse(data).state == 0) { 
+                alert('用户已经存在')
+            }else{
+                location.href='http://localhost:3000/'
+            }
+        }
+    })
 })
