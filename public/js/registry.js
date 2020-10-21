@@ -119,7 +119,9 @@ $('.email').on('blur', function(){
     }
 })
 //提交
-$('.registry').on('submit', function() {
+$('.registry').on('submit', function(e) {
+    e.preventDefault()
+    console.log(1);
     if ($('.username').val() == '') {
         $('p').eq(0).html('用户名不能为空').css('color', 'red')
         userflag = false;
