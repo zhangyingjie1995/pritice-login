@@ -50,6 +50,36 @@ module.exports = {
     login:(name,password) => {
       return new Promise( async (resolve,reject) => {
         const result = await this.find()
+        let flag = false
+        let mail = ''
+        let path = ''
+        result.map((item) => {
+          if(item.name == name && item.password == password){
+            flag = true
+            mail = item.mail
+            path = item.path
+          }
+        })
+        if(f){
+          resolve({
+            state:1,
+            msg:'用户名正确',
+            mail,
+            path
+          })
+        }else{
+          if (result.some(item =>item.username == username )) {
+            resolve({
+                state: 0,
+                msg: '密码错误'
+            })
+          } else {
+              resolve({
+                  state: 2,
+                  msg: '您的账号不存在，请先去注册'
+              })
+          }
+        }
       })
     }
   }
