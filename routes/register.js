@@ -19,7 +19,7 @@ router.post('/',(req,res)=>{
       }
       if(result.length <= 0){
         //不存在重复的数据，插入到数据表
-        dbase.collection('count').insertOne({name,mail,password},(err,res)=>{
+        dbase.collection('count').insertOne({name,mail,password},(err,rest)=>{
           if(err){
             console.log(err)
           }

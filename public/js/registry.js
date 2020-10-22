@@ -2,6 +2,25 @@ var userflag = true;
 var passflag = true;
 var  passflag2 = true;
 var emailflag=true
+//图片上传
+let fileUrl=''
+$('.avatar').on('change',function(e){
+    const p = new FormData()
+    console.log(e)
+    p.append('file',e.target.files[0])
+    $.ajax({
+        type:'post',
+        url:"http://localhost:3000/register",
+        processData: false,
+        contentType: false,
+        data:p,
+        success(res){
+            console.log('res',res)
+            fileUrl = 'https://elm.cangdu.org/img/' + res.image_path
+        }
+    })
+})
+
 $('.username').on('focus',function(){
  $('p').eq(0).html('设置后不可更改，中英文均可，最长14个英文或7个汉字').css('color','red')
 }).on('blur',function(){
@@ -150,7 +169,7 @@ $('.registry').on('submit', function(e) {
             mail:$('.email').val()
         },
         success: function(data) {
-            if (JSON.parse(data).state == 0) { 
+            if (data.state == 0) { 
                 alert('用户已经存在')
             }else{
                 location.href='http://localhost:3000/'
