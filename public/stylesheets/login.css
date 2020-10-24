@@ -38,6 +38,9 @@ form h4{
     margin: 15px auto;
 }
 .mod-1 .btn{
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
     background-color: blue;
     outline: none;
     border: 0;
