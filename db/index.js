@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
-const HOST = '127.0.0.1'
+const HOST = 'localhost'
 const DB_BASE = 'user'
-const dburl = `mongodb:${HOST}:27017/${DB_BASE}`
+const dburl = `mongodb://${HOST}:27017/${DB_BASE}`
 
 
-mongoose.connect(dburl,{useNewUrlParser:true},(err)=>{
+mongoose.connect(dburl,{useNewUrlParser:true,useUnifiedTopology: true},(err)=>{
   if(err){
     console.log(err)
   }
@@ -22,7 +22,7 @@ const userModal = mongoose.model('user',userSchema)
 
 module.exports = {
   user:{
-    push:(data) => {
+    push(data) {
       return new Promise(async (resolve,reject) => {
         const userMd = new userModal(data)
         const result = await this.find()
@@ -34,22 +34,26 @@ module.exports = {
         }else{
           userMd.save()
           resolve({
-            state:0,
+            state:1,
             msg:'注册成功'
           })
         }
       })
     },
-    find:() => {
+    find()  {
       return new Promise((resolve,reject)=>{
         userModal.find({},(err,res) => {
+          if(err){
+            console.log(err)
+          }
           resolve(res)
         })
       })
     },
-    login:(name,password) => {
+    login(name,password) {
       return new Promise( async (resolve,reject) => {
         const result = await this.find()
+
         let flag = false
         let mail = ''
         let path = ''
@@ -60,7 +64,7 @@ module.exports = {
             path = item.path
           }
         })
-        if(f){
+        if(flag){
           resolve({
             state:1,
             msg:'用户名正确',
@@ -68,7 +72,7 @@ module.exports = {
             path
           })
         }else{
-          if (result.some(item =>item.username == username )) {
+          if (result.some(item =>item.name == name )) {
             resolve({
                 state: 0,
                 msg: '密码错误'
