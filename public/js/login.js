@@ -1,7 +1,7 @@
 $('.btn').on('click',function(){
     $.ajax({
         type:'post',
-        url:"",
+        url:"http://localhost:3000/login",
         data:{
             username:$('.username').val(),
             password:$('.password').val(),
@@ -11,7 +11,7 @@ $('.btn').on('click',function(){
                 case 0:
                     $('p').eq(0).html(msg)
                     setTimeout(() => {
-                        $('p').html('')
+                        $('p').html('密码错误')
                       },2000)
                 break;
                 case 1:
@@ -20,6 +20,12 @@ $('.btn').on('click',function(){
                     setCookie('email',email,7)
                     setCookie('token',token,7)
                     setCookie('avatar',avatar,7)
+                    case 2:
+                        $('p').eq(1).html(msg)
+                        setTimeout(() => {
+                            $('p').html('账号不存在')
+                          },2000)
+
             };
             
         }

@@ -19,6 +19,7 @@ $('.avatar').on('change',function(e){
             fileUrl = 'https://elm.cangdu.org/img/' + res.image_path
         }
     })
+    
 })
 
 $('.username').on('focus',function(){
