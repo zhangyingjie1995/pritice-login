@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: url("../imge/TB1pfG4IFXXXXc6XXXXXXXXXXXX.jpg") no-repeat;
+    background-size: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+form{
+    width: 580px;
+    padding: 30px 0;
+    background-color:rgba(255,255, 255, 0.5) ;
+    border-radius: 10px;
+   
+}
+form h4{
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+}
+.mod{
+    width: 500px;
+    margin: 20px auto;
+    height: 65px;
+}
+.mod input{
+    width: 500px;
+    height: 40px;
+    outline: none;
+}
+.mod-1{
+    width: 500px;
+    margin: 15px auto;
+}
+.mod-1 .btn{
+    background-color: blue;
+    outline: none;
+    border: 0;
+    width: 70px;
+    height: 30px;
+    font-size: 16px;
+    color: #ffffff;
+    }
